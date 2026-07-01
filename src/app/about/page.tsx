@@ -3,7 +3,10 @@ import Link from "next/link";
 import {
   ABOUT_PARAGRAPHS,
   CERTS,
+  EDUCATION,
   IDENTITY,
+  LANGUAGES,
+  PROFILE_FACTS,
   STACK_GROUPS,
   TAGLINES,
 } from "@/content/site";
@@ -91,25 +94,106 @@ export default function AboutPage() {
       </div>
 
       {/* -------- 04 · CERTS -------- */}
-      <SectionHead index="04" label="CERTS" title="Signed proof" />
+      <SectionHead
+        index="04"
+        label="CERTS"
+        title="Signed proof"
+        meta={`${String(CERTS.length).padStart(2, "0")} items`}
+      />
       <ul className="border-t border-ink list-none p-0 m-0">
         {CERTS.map((c, i) => (
           <li
-            key={c}
+            key={`${c.issuer}-${c.name}`}
             className="grid-12 items-baseline py-5 border-b border-hair"
           >
             <div className="col-span-2 md:col-span-1 text-[14px] font-semibold text-muted tabular-nums">
               {String(i + 1).padStart(2, "0")}
             </div>
-            <div className="col-span-10 md:col-span-11 text-[16px] md:text-[18px] leading-[1.45] text-ink-soft">
-              {c}
+            <div className="col-span-10 md:col-span-7 text-[16px] md:text-[18px] leading-[1.45] text-ink-soft">
+              {c.name}
+            </div>
+            <div className="col-span-8 md:col-span-3 mt-1 md:mt-0 eyebrow text-oxide">
+              {c.issuer}
+            </div>
+            <div className="col-span-4 md:col-span-1 mt-1 md:mt-0 md:text-right text-[13px] tabular-nums text-muted">
+              {c.year}
             </div>
           </li>
         ))}
       </ul>
 
-      {/* -------- 05 · LINKS -------- */}
-      <SectionHead index="05" label="LINKS" title="Where to find me" />
+      {/* -------- 05 · EDUCATION -------- */}
+      <SectionHead index="05" label="EDUCATION" title="Where it started" />
+      <div className="border-t border-ink">
+        <div className="grid-12 items-baseline py-6 border-b border-hair">
+          <div className="col-span-12 md:col-span-3 eyebrow">School</div>
+          <div className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.4] tracking-[-0.005em] text-ink-soft">
+            {EDUCATION.school}
+          </div>
+        </div>
+        <div className="grid-12 items-baseline py-6 border-b border-hair">
+          <div className="col-span-12 md:col-span-3 eyebrow">Degree</div>
+          <div className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.4] tracking-[-0.005em] text-ink-soft">
+            {EDUCATION.degree}
+          </div>
+        </div>
+        <div className="grid-12 items-baseline py-6 border-b border-hair">
+          <div className="col-span-12 md:col-span-3 eyebrow">Dates</div>
+          <div className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.4] tabular-nums text-ink-soft">
+            {EDUCATION.dates}
+          </div>
+        </div>
+        <div className="grid-12 items-baseline py-6 border-b border-hair">
+          <div className="col-span-12 md:col-span-3 eyebrow">CGPA</div>
+          <div className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.4] tabular-nums text-ink-soft">
+            {EDUCATION.cgpa}
+          </div>
+        </div>
+        <div className="grid-12 items-baseline py-6 border-b border-hair">
+          <div className="col-span-12 md:col-span-3 eyebrow">Focus</div>
+          <div className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.4] tracking-[-0.005em] text-ink-soft">
+            {EDUCATION.focus}
+          </div>
+        </div>
+      </div>
+
+      {/* -------- 06 · LANGUAGES -------- */}
+      <SectionHead index="06" label="LANGUAGES" title="Spoken" />
+      <div className="grid-12">
+        <p className="col-span-12 md:col-span-9 text-[18px] md:text-[20px] leading-[1.55] text-ink-soft m-0">
+          {LANGUAGES.map((l, i) => (
+            <span key={l.name}>
+              {i > 0 && <span className="mx-3 text-muted">·</span>}
+              <span className="text-ink">{l.name}</span>{" "}
+              <span className="text-muted">({l.level})</span>
+            </span>
+          ))}
+        </p>
+      </div>
+
+      {/* -------- 07 · FACTS -------- */}
+      <SectionHead index="07" label="FACTS" title="Quick reference" />
+      <dl className="border-t border-ink list-none p-0 m-0">
+        {PROFILE_FACTS.map((f, i) => (
+          <div
+            key={f.label}
+            className="grid-12 items-baseline py-5 border-b border-hair"
+          >
+            <div className="col-span-2 md:col-span-1 text-[14px] font-semibold text-muted tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <dt className="col-span-10 md:col-span-3 eyebrow text-oxide">
+              {f.label}
+            </dt>
+            <dd className="col-span-12 md:col-span-8 m-0 mt-1 md:mt-0 text-[16px] md:text-[18px] leading-[1.45] text-ink-soft">
+              {f.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {/* -------- 08 · LINKS -------- */}
+      <SectionHead index="08" label="LINKS" title="Where to find me" />
       <div className="grid-12">
         <dl className="col-span-12 md:col-span-8 md:col-start-3 grid grid-cols-1 md:grid-cols-12 gap-y-3 text-[15px]">
           <dt className="md:col-span-3 eyebrow self-center">Email</dt>
